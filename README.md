@@ -1,11 +1,10 @@
 Painted Ladies
 ================
-Meredith Moore
+Grace Karbowski, Meredith Moore, Larz von Huene
 4/20/2022
 
-\#Load Packages
 
-\#Import the Data
+Import the Data
 
 ``` r
 G1 <- read_xlsx("BIO_373_caterpillar_data.xlsx", sheet = "Group_1" , na= c("NA",""))
@@ -14,9 +13,6 @@ G3 <- read_xlsx("BIO_373_caterpillar_data.xlsx", sheet = "Group_3", na= c("NA","
 G4 <- read_xlsx("BIO_373_caterpillar_data.xlsx", sheet = "Group_4", na= c("NA",""))
 G5 <- read_xlsx("BIO_373_caterpillar_data.xlsx", sheet = "Group_5", na= c("NA",""))
 ```
-
-    ## New names:
-    ## * `` -> ...8
 
 ``` r
 G5 <- G5 %>% 
@@ -36,7 +32,7 @@ catdata<- catdata %>%
   mutate(treatment = recode(treatment, cold= "cold", hot= "heatwave"))
 ```
 
-\#Survivability
+Survivability
 
 ``` r
 survivalcounts<- catdata %>% 
@@ -54,11 +50,7 @@ survivalwider <- pivot_wider(survivalcounts, names_from = treatment, values_from
 ``` r
 chisq.test(survivalwider[c(3,4)],correct=F)
 ```
-
-    ## 
     ##  Pearson's Chi-squared test
-    ## 
-    ## data:  survivalwider[c(3, 4)]
     ## X-squared = 13.333, df = 1, p-value = 0.0002607
 
 ``` r
@@ -72,9 +64,9 @@ ggplot(data=survivalcounts, aes(x=treatment,y=number, fill=survived))+
   theme_cowplot()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> \#Development
-Time
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> 
 
+Development Time
 ``` r
 dtcatdata <- catdata %>% 
   select(lid, treatment, hatched, pupa, emergence) %>% 
@@ -103,9 +95,6 @@ ggplot(dtcatdata, aes (x=treatment, y=edt, fill=treatment))+
   theme_cowplot()
 ```
 
-    ## Warning: Removed 32 rows containing non-finite values (stat_boxplot).
-
-    ## Warning: Removed 32 rows containing missing values (geom_point).
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
